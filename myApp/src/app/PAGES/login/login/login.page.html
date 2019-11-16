@@ -1,0 +1,31 @@
+<ion-grid>
+    <ion-row justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+                <h4>Inicio de Sesion</h4>
+            </div>
+            <div padding>
+                <ion-item>
+                    <ion-label position="floating"> Email </ion-label>
+                    <ion-input type="text" [(ngModel)]="in_email"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating"> Password </ion-label>
+                    <ion-input type="password" [(ngModel)]="in_password"></ion-input>
+                </ion-item>
+            </div>
+
+            <div padding>
+                <section>
+                </section>
+                <ion-button expand="block" color="success" (click)="InicioSesion(in_email, in_password)" fill="outline">Login</ion-button>
+                <ion-button expand="block" (click)="goToRoute('/registro')" fill="outline">Registro</ion-button>
+                <ion-label (click)="goToRoute('/recuperacion')" color="danger">Olvide mi password</ion-label>
+            </div>
+            <div padding>
+            </div>
+            <!--<ion-button expand="block" (click)="goToRoute('/tabs/tabs/tab1')" fill="outline">Login</ion-button> -->
+        </ion-col>
+    </ion-row>
+</ion-grid>
