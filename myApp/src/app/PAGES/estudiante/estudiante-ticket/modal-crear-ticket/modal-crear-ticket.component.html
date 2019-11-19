@@ -1,0 +1,30 @@
+<ion-content>
+    <ion-header>
+        <ion-toolbar>
+            <ion-toolbar>
+                <ion-buttons slot="primary">
+                    <ion-buttons slot="end">
+                        <ion-button fill="clear" (click)="cerrar()">
+                            <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-buttons>
+                <div class="card-header">
+                    <h3 class="mb-0">Nuevo Ticket</h3>
+                </div>
+            </ion-toolbar>
+        </ion-toolbar>
+    </ion-header>
+    <div class="content">
+        <ion-item>
+            <ion-label>Asunto</ion-label>
+            <ion-input type="text" required [(ngModel)]="titulo"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Cuerpo</ion-label>
+            <ion-textarea [(ngModel)]="descripcion"></ion-textarea>
+        </ion-item>
+        <ion-button expand="block" type="submit" (click)="guardar(titulo, descripcion)" color="dark">Aceptar</ion-button>
+
+    </div>
+</ion-content>

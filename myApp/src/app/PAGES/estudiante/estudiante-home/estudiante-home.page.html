@@ -1,9 +1,58 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Etudiante Home</ion-title>
+        <ion-toolbar color="dark">
+            <ion-title>Home</ion-title>
+        </ion-toolbar>
     </ion-toolbar>
 </ion-header>
+<ion-content padding>
+    <div *ngFor="let item of usuarios" class="card card-profile">
+        <img src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                    <a href="#">
+                        <img src="../../../../assets/img/photo.png" class="rounded-circle">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+            <div class="d-flex justify-content-between">
+                <a (click)="verNotas()" style="color:white" class="btn btn-sm btn-info mr-4">Mis Notas</a>
+                <a (click)="logOut()" style="color:white" class="btn btn-sm btn-default float-right">Log Out</a>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <div class="card-profile-stats d-flex justify-content-center">
+                <div>
+                    <span class="heading">{{item.idUsuario}}</span>
+                    <span class="description">ID #</span>
+                </div>
+                <div>
+                    <span class="heading">{{item.carnet}}</span>
+                    <span class="description">Carnet</span>
+                </div>
+                <div>
+                    <span class="heading">89</span>
+                    <span class="description">Comments</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <h5 class="h3">
+                    Nombre: {{item.nombre}} {{item.apellido}}
+                </h5>
+                <div class="h5 font-weight-300">
+                    <i class="ni location_pin mr-2"></i>{{item.tipo}}
+                </div>
+                <div class="h5 mt-4">
+                    <i class="ni business_briefcase-24 mr-2"></i>Usuario: {{item.username}}
+                </div>
 
-<ion-content>
-
+                <div>
+                    <i class="ni education_hat mr-2"></i>Universidad de San Carlos
+                </div>
+            </div>
+        </div>
+    </div>
 </ion-content>

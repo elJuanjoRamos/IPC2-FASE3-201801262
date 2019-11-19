@@ -19,22 +19,22 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'estudiante-cursos',
         children: [
           {
-            /*path: '',
+            path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)*/
+              import('../estudiante-cursos/estudiante-cursos.module').then(m => m.EstudianteCursosPageModule)
           }
         ]
       },
       {
-        path: 'tab3',
+      path: 'estudiante-ticket',
         children: [
           {
-            /*path: '',
+            path: '',
             loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)*/
+              import('../estudiante-ticket/estudiante-ticket.module').then(m => m.EstudianteTicketPageModule)
           }
         ]
       },

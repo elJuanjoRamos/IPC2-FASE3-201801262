@@ -7,6 +7,7 @@ var ticket_controller_1 = __importDefault(require("./../controller/ticket.contro
 var ticket = express_1.Router();
 ticket.get('/ticket/', ticket_controller_1.default.getInstance().getAll);
 ticket.get('/ticket/:id', ticket_controller_1.default.getInstance().getMyTickets);
+ticket.get('/ticketsingle/:id', ticket_controller_1.default.getInstance().getSingle);
 ticket.post('/ticket', ticket_controller_1.default.getInstance().create);
 ticket.put('/ticket/:id', ticket_controller_1.default.getInstance().update);
 ticket.delete('/ticket/:id', ticket_controller_1.default.getInstance().delete);

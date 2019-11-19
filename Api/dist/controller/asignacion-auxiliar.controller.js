@@ -17,7 +17,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
             });
         };
         this.getSingle = function(req, res) {
-            var query = "\n     select concat(Usuario.nombre, ' ' ,Usuario.apellido) as aux, Curso.nombre, Curso.codigo, Curso.estado, DetalleCurso.horaInicio, DetalleCurso.horaFin, Seccion.nombre as seccion FROM AsignacionAuxiliar       \n INNER JOIN Usuario ON AsignacionAuxiliar.idUsuario = Usuario.idUsuario\n INNER JOIN DetalleCurso ON AsignacionAuxiliar.idDetalleCurso = AsignacionAuxiliar.idDetalleCurso \n INNER JOIN Curso ON DetalleCurso.idCurso = Curso.idCurso \n  INNER JOIN Seccion ON DetalleCurso.idSeccion = Seccion.idSeccion \n WHERE idAsignacionAuxiliar = ?          ";
+            var query = "\n     select concat(Usuario.nombre, ' ' ,Usuario.apellido) as aux, Curso.nombre, Curso.codigo, Curso.estado, DetalleCurso.horaInicio, DetalleCurso.horaFin, Seccion.nombre as seccion FROM AsignacionAuxiliar       \n INNER JOIN Usuario ON AsignacionAuxiliar.idUsuario = Usuario.idUsuario\n INNER JOIN DetalleCurso ON AsignacionAuxiliar.idDetalleCurso = DetalleCurso.idDetalleCurso \n INNER JOIN Curso ON DetalleCurso.idCurso = Curso.idCurso \n  INNER JOIN Seccion ON DetalleCurso.idSeccion = Seccion.idSeccion \n WHERE idAsignacionAuxiliar = ?          ";
             var body = {
                 idCurso: req.params.id
             };

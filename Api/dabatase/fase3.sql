@@ -30,5 +30,16 @@ SELECT idUsuario from Usuario where username = "amigo1@fase3.com";
 call  SP_RecuperarPassword("amigo1@fase3.com", "hola");
 
 
+select * from asignacionauxiliar
+
+select concat(Usuario.nombre, ' ' ,Usuario.apellido) as aux, DetalleCurso.horaIncio, DetalletaCursol.horaFin FROM AsignacionAuxiliar   
+INNER JOIN Usuario on AsignacionAuxiliar.idUsuario = Usuario.idUsuario
+INNER JOIN DetalleCurso on AsignacionAuxiliar.idDetalleCurson = DetalleCurso.idDetalleCurso
 
 
+    select concat(Usuario.nombre, ' ' ,Usuario.apellido) as aux, Curso.nombre, Curso.codigo, Curso.estado, DetalleCurso.horaInicio, DetalleCurso.horaFin, Seccion.nombre as seccion FROM AsignacionAuxiliar   
+    INNER JOIN Usuario ON AsignacionAuxiliar.idUsuario = Usuario.idUsuario 
+    INNER JOIN DetalleCurso ON AsignacionAuxiliar.idDetalleCurso = DetalleCurso.idDetalleCurso 
+    INNER JOIN Curso ON DetalleCurso.idCurso = Curso.idCurso 
+    INNER JOIN Seccion ON DetalleCurso.idSeccion = Seccion.idSeccion 
+    WHERE idAsignacionAuxiliar = 6         

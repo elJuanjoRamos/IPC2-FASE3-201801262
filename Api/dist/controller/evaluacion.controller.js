@@ -37,7 +37,6 @@ var EvaluacionController = /** @class */ (function() {
                         error: err
                     });
                 } else {
-                    console.log(data)
                     res.json(data);
                 }
             });

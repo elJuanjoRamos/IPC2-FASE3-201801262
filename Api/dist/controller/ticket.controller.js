@@ -28,7 +28,17 @@ var TicketController = /** @class */ (function() {
                 }
             });
         };
-
+        this.getSingle = function(req, res) {
+            var id = req.params.id;
+            var query = "\n SELECT * FROM Ticket WHERE idTicket = " + id;
+            mysql_1.default.getQuery(query, function(err, data) {
+                if (err) {
+                    res.json([]);
+                } else {
+                    res.json(data);
+                }
+            });
+        };
         this.create = function(req, res) {
             var query = "\n   CALL SP_CrearTicket(?, ?, ?)\n        ";
             var body = {

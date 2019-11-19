@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-toolbar color="dark">
+            <ion-buttons slot="primary">
+                <ion-button (click)="crearTicket()" color="danger" fill="outline">
+                    Nuevo
+                    <ion-icon slot="end" name="create"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>Mis Tickets</ion-title>
+        </ion-toolbar>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+    <ion-card *ngFor="let u of arrayTickets">
+        <ion-item>
+            <ion-icon name="text" slot="start"></ion-icon>
+            <ion-label>Asunto: {{ u.asunto }}</ion-label>
+            <ion-button fill="outline" (click)="verTicket(u.idTicket)" slot="end">Ver</ion-button>
+        </ion-item>
+
+        <ion-card-content>
+            Descripcion: {{u.cuerpo}}.
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

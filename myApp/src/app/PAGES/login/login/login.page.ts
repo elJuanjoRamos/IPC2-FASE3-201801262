@@ -22,9 +22,6 @@ export class LoginPage implements OnInit {
   public goToRoute(ruta:string) {
     this.router.navigate([ruta]);
   }
-  segmentButtonClicked(ev: any) {
-    console.log('Segment button clicked', ev);
-  }
 
   async InicioSesion(ursn: string, pass: string) {
     if (ursn === undefined || pass === undefined) {
