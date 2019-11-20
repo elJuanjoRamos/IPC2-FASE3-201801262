@@ -1,0 +1,120 @@
+<ion-content>
+    <ion-header>
+        <ion-toolbar>
+            <ion-toolbar>
+                <ion-buttons slot="primary">
+                    <ion-buttons slot="end">
+                        <ion-button fill="clear" (click)="cerrar()">
+                            <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-buttons>
+                <div class="card-header">
+                    <h3 class="mb-0">{{message}}</h3>
+                </div>
+            </ion-toolbar>
+        </ion-toolbar>
+    </ion-header>
+    <div *ngIf="miCurso" class="card">
+        <div class="card-body pt-0">
+            <br>
+            <div class="text-center">
+                <h5 class="h3">
+                    Nombre: {{miCurso.nombre}}<span class="font-weight-light"></span>
+                </h5>
+                <div class="h5 font-weight-300">
+                    <i class="ni location_pin mr-2"></i>Estado: Habilitado
+                </div>
+                <div class="h5 mt-4">
+                    <i class="ni business_briefcase-24 mr-2"></i>Codigo: {{miCurso.codigo}} - Seccion: {{miCurso.seccion}}
+                </div>
+                <div>
+                    <i class="ni education_hat mr-2"></i>Horario: {{miCurso.horaInicio}} to {{miCurso.horaFin}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Estudiantes Asignados</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <div>
+                            #ID
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div>
+                            Nombre
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div>
+                            Carnet
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let u of misEstudiantes">
+                    <ion-col>
+                        <div>
+                            {{u.idUsuario}}
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div>
+                            {{u.estudiante}}
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div>
+                            {{u.carnet}}
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+
+        <ion-card-header>
+            Formulario de Actividad
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+
+                <ion-item>
+                    <ion-label fixed>Nombre: </ion-label>
+                    <ion-input type="text" value=""></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label fixed>Ponderacion: </ion-label>
+                    <ion-input type="number"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Hora Limite</ion-label>
+                    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Fecha Limite</ion-label>
+                    <ion-datetime min="1990-02" max="2000" [dayShortNames]="customDayShortNames" displayFormat="DDD. MMM DD, YY" monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Archivos</ion-label>
+                    <ion-select value="0" ok-text="Okay" cancel-text="Dismiss">
+                        <ion-select-option value="0">No permitir</ion-select-option>
+                        <ion-select-option value="1">Permitir</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+
+    </ion-card>
+
+
+</ion-content>

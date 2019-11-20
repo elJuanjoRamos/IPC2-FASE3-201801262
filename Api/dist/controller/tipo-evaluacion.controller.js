@@ -57,7 +57,7 @@ var TipoEvaluacionController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, [body.idDetalleEvaluacion, body.pregunta, body.respuesta], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -79,7 +79,7 @@ var TipoEvaluacionController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, [body.idEvaluacion, body.idUsuario, body.punteo], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -97,7 +97,7 @@ var TipoEvaluacionController = /** @class */ (function() {
             var query = "\n     SP_EliminarEvaluacionVF(?);\n        ";
             mysql_1.default.sendQuery(query, id, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -122,7 +122,7 @@ var TipoEvaluacionController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, [body.idDetalleEvaluacion, body.pregunta, body.respuesta1, body.respuesta2, body.respuesta3, body.correcta], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -140,7 +140,7 @@ var TipoEvaluacionController = /** @class */ (function() {
             var query = "\n     SP_EliminarEvaluacionSM(?);\n        ";
             mysql_1.default.sendQuery(query, id, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err

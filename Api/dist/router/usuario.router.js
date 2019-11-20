@@ -14,6 +14,7 @@ usuario.get('/auxiliar', usuario_controller_1.default.getInstance().getAllAuxili
 usuario.get('/misauxiliares/:id', usuario_controller_1.default.getInstance().getAllAuxiliares);
 usuario.get('/misestudiantes/:id', usuario_controller_1.default.getInstance().getAllEstudiante);
 usuario.get('/usuario/:id', usuario_controller_1.default.getInstance().getSingle);
+usuario.get('/mypost/:id', usuario_controller_1.default.getInstance().getMyPost);
 usuario.post('/usuario', usuario_controller_1.default.getInstance().create);
 usuario.put('/usuario/:id', usuario_controller_1.default.getInstance().update);
 usuario.put('/usuariopass/:id', usuario_controller_1.default.getInstance().updatePassword);

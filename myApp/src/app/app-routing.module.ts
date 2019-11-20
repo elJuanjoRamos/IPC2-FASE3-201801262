@@ -23,6 +23,8 @@ const routes: Routes = [
   { path: 'recuperacion', loadChildren: './PAGES/recuperacion/recuperacion.module#RecuperacionPageModule' },
   { path: 'estudiante-cursos', loadChildren: './PAGES/estudiante/estudiante-cursos/estudiante-cursos.module#EstudianteCursosPageModule' },
   { path: 'estudiante-ticket', loadChildren: './PAGES/estudiante/estudiante-ticket/estudiante-ticket.module#EstudianteTicketPageModule' },
+  { path: 'auxiliar-cursos', loadChildren: './PAGES/auxiliar/auxiliar-cursos/auxiliar-cursos.module#AuxiliarCursosPageModule' },
+  { path: 'auxiliar-post', loadChildren: './PAGES/auxiliar/auxiliar-post/auxiliar-post.module#AuxiliarPostPageModule' },
 
 ];
 @NgModule({

@@ -1,0 +1,164 @@
+<ion-content>
+    <ion-header>
+        <ion-toolbar>
+            <ion-toolbar>
+                <ion-buttons slot="primary">
+                    <ion-buttons slot="end">
+                        <ion-button fill="clear" (click)="cerrar()">
+                            <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-buttons>
+                <div class="card-header">
+                    <h3 class="mb-0">{{message}}</h3>
+                </div>
+            </ion-toolbar>
+        </ion-toolbar>
+    </ion-header>
+    <div *ngIf="miCurso" class="card">
+        <div class="card-body pt-0">
+            <br>
+            <div class="text-center">
+                <h5 class="h3">
+                    Nombre: {{miCurso.nombre}}<span class="font-weight-light"></span>
+                </h5>
+                <div class="h5 font-weight-300">
+                    <i class="ni location_pin mr-2"></i>Estado: Habilitado
+                </div>
+                <div class="h5 mt-4">
+                    <i class="ni business_briefcase-24 mr-2"></i>Codigo: {{miCurso.codigo}} - Seccion: {{miCurso.seccion}}
+                </div>
+                <div>
+                    <i class="ni education_hat mr-2"></i>Horario: {{miCurso.horaInicio}} to {{miCurso.horaFin}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <ion-card>
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Fecha para corroborar:</ion-label>
+                <ion-datetime #corroborar (ionChange)="getFecha2(corroborar.value)" [dayShortNames]="customDayShortNames" displayFormat="DDD. MMM DD, YY" monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
+            </ion-item>
+            <ion-row>
+                <ion-col>
+                    <div>
+
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <div>
+                        <ion-button color="favorite" (click)="verAsistencias()">Ver Asistencias</ion-button>
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <div>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header *ngIf="corroborarAsistencia ==false">
+            <ion-card-title>Estudiantes Asignados</ion-card-title>
+        </ion-card-header>
+        <ion-item *ngIf="corroborarAsistencia ==false">
+            <ion-label>Fecha de asistencia:</ion-label>
+            <ion-datetime #myPicker (ionChange)="getFecha(myPicker.value)" [dayShortNames]="customDayShortNames" displayFormat="DDD. MMM DD, YY" monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
+        </ion-item>
+        <br>
+    </ion-card>
+    <br>
+    <ion-content *ngIf="corroborarAsistencia ==false">
+        <ion-item-group *ngFor="let u of misEstudiantes">
+            <ion-item-divider color="light">Nombre: {{u.estudiante}} / Carnet: {{u.carnet}}</ion-item-divider>
+            <ion-list>
+                <ion-radio-group>
+                    <ion-item>
+                        <ion-label>Presente</ion-label>
+                        <ion-radio (ionSelect)="enviarAsistencia('Presente', u.idUsuario)" value="1"></ion-radio>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Ausente</ion-label>
+                        <ion-radio (ionSelect)="enviarAsistencia('Ausente', u.idUsuario)" value="2"></ion-radio>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Tarde</ion-label>
+                        <ion-radio (ionSelect)="enviarAsistencia('Tarde', u.idUsuario)" value="3"></ion-radio>
+                    </ion-item>
+                </ion-radio-group>
+            </ion-list>
+        </ion-item-group>
+    </ion-content>
+
+    <div *ngIf="corroborarAsistencia ==true">
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Asistencias de la fecha {{globalFecha2}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <div>
+                                Nombre
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div>
+                                Carnet
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div>
+                                Asistencia
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row *ngFor="let u of misAsistencias">
+                        <ion-col>
+                            <div>
+                                {{u.estudiante}}
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div>
+                                {{u.carnet}}
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div>
+                                {{u.valor}}
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <div>
+
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div>
+                                <ion-button color="favorite" (click)="terminar()">Terminar</ion-button>
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div>
+
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+
+        </ion-card>
+
+    </div>
+
+
+</ion-content>

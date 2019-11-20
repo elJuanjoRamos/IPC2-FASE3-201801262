@@ -100,6 +100,7 @@ CREATE TABLE AsignacionEstudiante(
     ON DELETE CASCADE
 );
 
+
 -- CREATE TABLE MESSAGES
 DROP TABLE IF EXISTS Mensaje;
 CREATE TABLE Mensaje(
@@ -308,6 +309,67 @@ CREATE TABLE Ticket(
 	ON UPDATE CASCADE
     ON DELETE CASCADE
 );
+
+
+DROP TABLE IF EXISTS Asistencia;
+CREATE TABLE Asistencia(
+    idAsistencia INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    fechaAsistencia VARCHAR(100) NOT NULL,
+    idUsuario INT NOT NULL,
+    valor VARCHAR(100) NOT NULL,
+    idAsignacionAuxiliar INT NOT NULL,
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    FOREIGN KEY (idAsignacionAuxiliar) REFERENCES AsignacionAuxiliar(idAsignacionAuxiliar)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS Asistencia;
+CREATE TABLE Asistencia(
+    idAsistencia INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    fechaAsistencia VARCHAR(100) NOT NULL,
+    idUsuario INT NOT NULL,
+    valor VARCHAR(100) NOT NULL,
+    idAsignacionAuxiliar INT NOT NULL,
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    FOREIGN KEY (idAsignacionAuxiliar) REFERENCES AsignacionAuxiliar(idAsignacionAuxiliar)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+
+DROP TABLE IF EXISTS Post;
+CREATE TABLE Post(
+    idPost INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idUsuario INT NOT NULL,
+    texto VARCHAR(300) NULL,
+    video VARCHAR(300) Null,
+    imagen VARCHAR(100) NULL,
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+
+DROP TABLE IF EXISTS DetallePost;
+CREATE TABLE DetallePost(
+    idDetallePost INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idUsuario INT NOT NULL,
+    idPost INT NOT NULL,
+    comentario VARCHAR(300) NULL,
+    clike VARCHAR(300) Null,
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    FOREIGN KEY (idPost) REFERENCES Post(idPost)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
 
 -- SP  CREAR Asignacion de estudiante
 DELIMITER $$
@@ -906,3 +968,32 @@ $$
 
 
 
+DELIMITER $$
+CREATE PROCEDURE SP_Asistencia
+(IN _idUsuario INT, _fecha VARCHAR(100), _valor varchar(100), _idAsig INT)
+BEGIN
+DECLARE _existe INT;
+	SET _existe = (select COUNT(*) FROM Asistencia WHERE idUsuario = _idUsuario AND fechaAsistencia = _fecha AND idAsignacionAuxiliar = _idAsig);
+	IF(_existe = 0) THEN
+        INSERT INTO Asistencia(idUsuario, fechaAsistencia, valor, idAsignacionAuxiliar) VALUES(_idUsuario, _fecha, _valor, _idAsig);
+		SELECT _existe;
+	ELSE
+		UPDATE Asistencia SET valor = _valor WHERE idUsuario = _idUsuario AND fechaAsistencia = _fecha AND idAsignacionAuxiliar = _idAsig;
+		SELECT _existe;
+	END IF;
+END;
+$$
+
+DELIMITER $$
+CREATE PROCEDURE SP_GetAsistencia
+(IN _idUsuario INT, _fecha VARCHAR(100))
+BEGIN
+DECLARE _existe INT;
+	SELECT concat(Usuario.nombre, " ", Usuario.apellido) as estudiante, Usuario.carnet, valor FROM Asistencia 
+    INNER JOIN Usuario ON Asistencia.idUsuario = Usuario.idUsuario WHERE Asistencia.fechaAsistencia = _fecha AND Asistencia.idAsignacionAuxiliar = _idUsuario;
+END;
+$$
+
+
+
+CALL SP_GetAsistencia(1, '2019-11-19T17:56:17.248-06:00');

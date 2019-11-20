@@ -35,7 +35,15 @@ export class AsignacionAuxiliarService {
                 return data;
             }));
     }
-    
+   
+    getAsistencia(dt:any) {
+        let data = JSON.stringify(dt);
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('id')});
+        return this.http.post(`${this.URI}/asistenciaalumno/`, data, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+
     delete(id:any) {
         var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('id')});
         return this.http.delete(`${this.URI}/asignacion-auxiliar/${id}`, { headers }).pipe(map(data => {
@@ -43,10 +51,16 @@ export class AsignacionAuxiliarService {
         }));
     }
     post(dt:any) {
-        console.log(localStorage)
         let data = JSON.stringify(dt);
         var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('id')});
         return this.http.post(`${this.URI}/asignacion-auxiliar/`, data, { headers }).pipe(map(data => {
+            return data;
+        }));
+    }
+    postAsistencia(dt:any) {
+        let data = JSON.stringify(dt);
+        var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('id')});
+        return this.http.post(`${this.URI}/asistencia/`, data, { headers }).pipe(map(data => {
             return data;
         }));
     }

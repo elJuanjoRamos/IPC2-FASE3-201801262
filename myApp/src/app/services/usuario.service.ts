@@ -20,6 +20,11 @@ export class UsuarioService {
                 return user;
             }));
     }
+    getMyPost(id: any) {
+        return this.http.get<any>(`${this.URI}/mypost/${id}`).pipe(map(user => {
+                return user;
+            }));
+    }
     delete(id:any) {
         var headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('id')});
         return this.http.delete(`${this.URI}/usuario/${id}`, { headers }).pipe(map(user => {

@@ -23,11 +23,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, body.idCurso, function(err, data) {
                 if (err) {
-                    res.status(400).json({
-                        ok: false,
-                        status: 400,
-                        error: err
-                    });
+                    res.json([]);
                 } else {
                     res.json(data[0]);
                 }
@@ -40,11 +36,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, body.idCurso, function(err, data) {
                 if (err) {
-                    res.status(400).json({
-                        ok: false,
-                        status: 400,
-                        error: err
-                    });
+                    res.json([]);
                 } else {
                     res.json(data);
                 }
@@ -57,11 +49,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, body.idCurso, function(err, data) {
                 if (err) {
-                    res.status(400).json({
-                        ok: false,
-                        status: 400,
-                        error: err
-                    });
+                    res.json([]);
                 } else {
                     res.json(data);
                 }
@@ -74,11 +62,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, body.idCurso, function(err, data) {
                 if (err) {
-                    res.status(400).json({
-                        ok: false,
-                        status: 400,
-                        error: err
-                    });
+                    res.json([]);
                 } else {
                     res.json(data);
                 }
@@ -91,11 +75,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, body.idCurso, function(err, data) {
                 if (err) {
-                    res.status(400).json({
-                        ok: false,
-                        status: 400,
-                        error: err
-                    });
+                    res.json([]);
                 } else {
                     res.json(data);
                 }
@@ -110,7 +90,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
 
             mysql_1.default.sendQuery(query, [body.idUsuario, body.idDetalleCurso], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -140,7 +120,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
             var query = "\n            CALL SP_UpdateAsignacionAuxiliar(?, ?, ?)\n        ";
             mysql_1.default.sendQuery(query, [body.idUsuario, body.idDetalleCurso, body.idAsignacionAuxiliar], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -152,7 +132,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
                             status: 200
                         });
                     } else {
-                        res.status(400).json({
+                        res.json({
                             ok: false,
                             status: 400,
                             error: "Ya existe un registro"
@@ -166,7 +146,7 @@ var AsignacionAuxiliarController = /** @class */ (function() {
             var query = "\n            DELETE FROM AsignacionAuxiliar WHERE idAsignacionAuxiliar = ?\n        ";
             mysql_1.default.sendQuery(query, id, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -176,6 +156,52 @@ var AsignacionAuxiliarController = /** @class */ (function() {
                         ok: true,
                         status: 200,
                     });
+                }
+            });
+        };
+
+        this.createAsistencia = function(req, res) {
+            var query = "\n  CALL SP_Asistencia(?, ?,?,?);";
+            var body = {
+                idUsuario: req.body.idUsuario,
+                valor: req.body.valor,
+                fecha: req.body.fecha,
+                idAsig: req.body.idAsignacionAuxiliar
+            };
+            mysql_1.default.sendQuery(query, [body.idUsuario, body.fecha, body.valor, body.idAsig], function(err, data) {
+                if (err) {
+                    res.json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                } else {
+                    if (JSON.parse(JSON.stringify(data[0]))[0]._existe == 0) {
+                        res.json({
+                            ok: true,
+                            status: 200
+                        });
+                    } else {
+                        res.json({
+                            ok: false,
+                            status: 400,
+                            error: "Se edito el registro"
+                        });
+                    }
+                }
+            });
+        };
+        this.getAsistenciaEstudiante = function(req, res) {
+            var query = "\n CALL  SP_GetAsistencia(?,?)";
+            var body = {
+                idUsuario: req.body.id,
+                fecha: req.body.fecha
+            };
+            mysql_1.default.sendQuery(query, [body.idUsuario, body.fecha], function(err, data) {
+                if (err) {
+                    res.json([]);
+                } else {
+                    res.json(data[0]);
                 }
             });
         };

@@ -13,13 +13,12 @@ var EvaluacionController = /** @class */ (function() {
             var query = "CALL SP_get_Evaluaciones(?)";
             mysql_1.default.sendQuery(query, body.idAsignacionAuxiliar, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
                     });
                 } else {
-                    console.log(data)
                     res.json(data[0]);
                 }
             });
@@ -31,11 +30,7 @@ var EvaluacionController = /** @class */ (function() {
             var query = "select Evaluacion.idEvaluacion, Evaluacion.nombre, ponderacion FROM DetalleEvaluacion \n INNER JOIN Evaluacion ON DetalleEvaluacion.idEvaluacion = Evaluacion.idEvaluacion WHERE Evaluacion.idAsignacionAuxiliar = ? AND DetalleEvaluacion.activado = 1  ";
             mysql_1.default.sendQuery(query, body.idAsignacionAuxiliar, function(err, data) {
                 if (err) {
-                    res.status(400).json({
-                        ok: false,
-                        status: 400,
-                        error: err
-                    });
+                    res.json([]);
                 } else {
                     res.json(data);
                 }
@@ -48,7 +43,7 @@ var EvaluacionController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, body.idEvaluacion, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -66,7 +61,7 @@ var EvaluacionController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, [body.nombre, body.id], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -87,7 +82,7 @@ var EvaluacionController = /** @class */ (function() {
             var query = "\n  SP_ActualizarEvaluacion(?,?);\n ";
             mysql_1.default.sendQuery(query, [body.nombre, body.idEvaluacion], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -105,7 +100,7 @@ var EvaluacionController = /** @class */ (function() {
             var query = "\n CALL SP_EliminarEvaluacion(?);\n        ";
             mysql_1.default.sendQuery(query, id, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -137,7 +132,7 @@ var EvaluacionController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, body.idEvaluacion, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -158,7 +153,7 @@ var EvaluacionController = /** @class */ (function() {
             var query = "\n CALL SP_CreateDetalleEvaluacion(" + body.idEvaluacion + "," + body.activado + "," + body.aleatorio + "," + body.ponderacion + ");\n        ";
             mysql_1.default.sendQuery(query, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -176,7 +171,7 @@ var EvaluacionController = /** @class */ (function() {
             var query = "\n  SP_EliminarDetalleEvaluacion(?);\n        ";
             mysql_1.default.sendQuery(query, id, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -199,7 +194,7 @@ var EvaluacionController = /** @class */ (function() {
             var query = "\n CALL  SP_ActualizarDetalleEvaluacion(" + body.id + "," + body.activado + "," + body.aleatorio + "," + body.ponderacion + ");\n ";
             mysql_1.default.sendQuery(query, [body.id, body.activado, body.aleatorio, body.ponderacion], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err

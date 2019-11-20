@@ -18,6 +18,7 @@ export class ModalDetalleComponent implements OnInit {
   misActividades: any;
   misEvaluaciones: any;
   modalEvaluacion: boolean = false;
+  modalActividad: boolean = false;
   message: string;
 
   //#region VARIABLES EVALUACION
@@ -31,9 +32,11 @@ export class ModalDetalleComponent implements OnInit {
   validarVF: boolean = false;
   validarPreguntas: boolean = false;
   validarDetalle: boolean = true;
-  
   //#endregion
 
+  //#region VARIABLES ACTIVIDAD
+  actividad: any[] = [];
+  //#endregion
   constructor(
     private tipoService: TipoEvaluacionService,
     private navParams: NavParams, private modal: ModalController, public toastController: ToastController,
@@ -173,5 +176,42 @@ export class ModalDetalleComponent implements OnInit {
     this.validarPreguntas = false;
     this.validarDetalle = true;
   }
+
+
+//#region ACTIVIDAD
+  
+  resolver(id: number){
+    this.actividad = [];
+    this.message = "Formulario de Actividad";
+    this.modalEvaluacion = false;
+    this.modalActividad = true;
+    this.actividadService.getActividad(id).subscribe(data => {
+      console.log(data);
+      this.actividad.push(data);
+    });
+  }
+  cerrar3() {
+    this.inicializar();
+    this.modalEvaluacion = false;
+    this.modalActividad = false;
+  }
+
+  resolverActividad(id: any) {
+    this.actividadService.getActividad(id).subscribe(data => {
+      var d = {
+        idUsuario: localStorage.getItem('id'),
+        idActividad: id,
+        entregada: 1,
+        ponderacion: Math.floor(Math.random() * data.ponderacion) + 1
+      };
+      this.actividadService.postRespuesta(d).subscribe(data =>{
+        this.cerrar3();
+      });
+    });
+  }
+
+//#endregion
+
+
 
 }

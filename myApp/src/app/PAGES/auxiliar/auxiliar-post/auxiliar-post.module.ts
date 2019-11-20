@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AuxiliarHomePage } from './auxiliar-home.page';
-import { UsuarioService } from '../../../services/usuario.service';
+import { AuxiliarPostPage } from './auxiliar-post.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AuxiliarHomePage
+    component: AuxiliarPostPage
   }
 ];
 
@@ -21,7 +20,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
-  ], providers:[UsuarioService],
-  declarations: [AuxiliarHomePage]
+  ],
+  declarations: [AuxiliarPostPage]
 })
-export class AuxiliarHomePageModule {}
+export class AuxiliarPostPageModule {}

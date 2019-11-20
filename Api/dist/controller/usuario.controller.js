@@ -67,7 +67,7 @@ var UsuarioController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, body.idUsuario, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -90,7 +90,7 @@ var UsuarioController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, [body.carnet, body.dpi, body.username, body.password, body.nombre, body.apellido, body.idTipoUsuario], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -118,7 +118,7 @@ var UsuarioController = /** @class */ (function() {
             };
             mysql_1.default.sendQuery(query, [body.username, body.password], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -141,7 +141,7 @@ var UsuarioController = /** @class */ (function() {
             var query = "\n            UPDATE Usuario SET nombre = ?, apellido = ?, username = ?,\n                password = ?, dpi = ?, carnet = ?\n                WHERE idUsuario = ?;\n        ";
             mysql_1.default.sendQuery(query, [data.nombre, data.apellido, data.username, data.password, data.dpi, data.carnet, data.id], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -162,7 +162,7 @@ var UsuarioController = /** @class */ (function() {
             var query = "call SP_RecuperarPassword(?,?)";
             mysql_1.default.sendQuery(query, [data.username, data.password], function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -180,7 +180,7 @@ var UsuarioController = /** @class */ (function() {
             var query = "\n            DELETE FROM Usuario WHERE idUsuario = ?;\n        ";
             mysql_1.default.sendQuery(query, id, function(err, data) {
                 if (err) {
-                    res.status(400).json({
+                    res.json({
                         ok: false,
                         status: 400,
                         error: err
@@ -190,6 +190,17 @@ var UsuarioController = /** @class */ (function() {
                         ok: true,
                         status: 200,
                     });
+                }
+            });
+        };
+        this.getMyPost = function(req, res) {
+            var id = req.params.id;
+            var query = "SELECT * FROM Post where idUsuario = " + id;
+            mysql_1.default.getQuery(query, function(err, data) {
+                if (err) {
+                    res.json([]);
+                } else {
+                    res.json(data);
                 }
             });
         };
