@@ -1,0 +1,47 @@
+<ion-content>
+    <ion-header>
+        <ion-toolbar>
+            <ion-toolbar>
+                <ion-buttons slot="primary">
+                    <ion-buttons slot="end">
+                        <ion-button fill="clear" (click)="cerrar()">
+                            <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-buttons>
+                <div class="card-header">
+                    <h3 class="mb-0">Chat</h3>
+                </div>
+            </ion-toolbar>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <div class="msg_history">
+            <div *ngFor="let item of table">
+                <div *ngIf="item.estado != 1">
+                    <div class="incoming_msg" *ngIf="item.idUsuario1!=usuarioId">
+                        <div class="received_msg">
+                            <div class="received_withd_msg">
+                                <p>{{item.cuerpo}}</p>
+                                <span class="time_date">{{item.fecha | date: 'medium'}}</span>
+                                <span class="time_date" *ngIf="item.leido==0">No Leído</span>
+                                <span class="time_date" *ngIf="item.leido==1">Leído {{item.fechaLeido | date: 'short'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="item.estado != 1">
+                    <div class="outgoing_msg" *ngIf="item.idUsuario1==usuarioId">
+                        <div class="sent_msg">
+                            <p (click)="presentActionSheet(item.idMensaje)">{{item.cuerpo}}</p>
+                            <span class="time_date">{{item.fecha | date: 'medium'}}</span>
+                            <span class="time_date" *ngIf="item.leido==0">No Leído</span>
+                            <span class="time_date" *ngIf="item.leido==1">Leído {{item.fechaLeido | date: 'short'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+</ion-content>

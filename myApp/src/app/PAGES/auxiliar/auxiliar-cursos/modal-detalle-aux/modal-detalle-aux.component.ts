@@ -55,7 +55,11 @@ export class ModalDetalleAuxComponent implements OnInit {
   }
 
 
-
+  eliminar(id:any) {
+    this.actividadService.delete(id).subscribe(data =>{
+        this.inicializar();
+    });
+  }
   async mensaje( texto: string ) {
     const toast = await this.toastController.create({
       message: texto,
@@ -64,6 +68,23 @@ export class ModalDetalleAuxComponent implements OnInit {
     toast.present();
   }
 
-
+  guardar(n: string, p: string, h: string, f: string, a: string, ){
+      if(n === undefined|| p === undefined|| h === undefined|| f === undefined|| a === undefined){
+          this.mensaje('Uno o mas campos estan vacios');
+      } else{
+        const data = {
+          nombre: n,
+          ponderacion: p,
+          horaLimite: h,
+          fechaLimite: f,
+          conArchivo: a,
+          idAsignacionAuxiliar: this.navParams.get('parametro')
+        }
+        this.actividadService.post(data)
+        .subscribe(d => {
+            this.inicializar();
+        });
+      }
+  }
 
 }

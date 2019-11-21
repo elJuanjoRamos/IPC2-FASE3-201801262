@@ -1,0 +1,216 @@
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Admin</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a>Dashboards</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Usuarios</h5>
+                                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                        <i class="ni ni-active-40"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Cursos</h5>
+                                    <span class="h2 font-weight-bold mb-0">2,356</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                        <i class="ni ni-chart-pie-35"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Detalles</h5>
+                                    <span class="h2 font-weight-bold mb-0">924</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                        <i class="ni ni-money-coins"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Auxiliares</h5>
+                                    <span class="h2 font-weight-bold mb-0">49,65%</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                        <i class="ni ni-chart-bar-32"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Members list group card -->
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                    <!-- Title -->
+                    <h5 class="h3 mb-0">Solicitudes de Desasignacion</h5>
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                    <!-- List group -->
+                    <ul class="list-group list-group-flush list my--3">
+                        <li *ngFor="let item of solicitudes" class="list-group-item px-0">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <!-- Avatar -->
+                                    <a class="avatar rounded-circle">
+                                        <img alt="Image placeholder" src="https://static.vecteezy.com/system/resources/previews/000/362/094/non_2x/add-user-vector-icon.jpg">
+                                    </a>
+                                </div>
+                                <div class="col ml--2">
+                                    <h4 class="mb-0">
+                                        <a>{{item.estudiante}}</a>
+                                    </h4>
+                                    <span class="text-success">●</span>
+                                    <small>{{item.curso}}</small>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" (click)='eliminar(item.idAsignacionEstudiante)' class="btn btn-sm btn-primary">Eliminar</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <!-- Checklist -->
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                    <!-- Title -->
+                    <h5 class="h3 mb-0">Tickets</h5>
+                </div>
+                <!-- Card body -->
+                <div class="card-body p-0">
+                    <!-- List group -->
+                    <ul *ngFor="let item of tickets" class="list-group list-group-flush" data-toggle="checklist">
+                        <li class="checklist-entry list-group-item flex-column align-items-start py-4 px-4">
+                            <div class="checklist-item checklist-item-success">
+                                <div class="checklist-info">
+                                    <h5 class="checklist-title mb-0">{{item.asunto}}</h5>
+                                    <small>10:30 AM</small>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-checkbox custom-checkbox-success">
+                                        <input class="custom-control-input" id="chk-todo-task-1" type="checkbox">
+                                        <label class="custom-control-label" for="chk-todo-task-1"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <!-- Progress track -->
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                    <!-- Title -->
+                    <h5 class="h3 mb-0">Cursos</h5>
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                    <!-- List group -->
+                    <ul class="list-group list-group-flush list my--3">
+                        <li *ngFor="let item of cursos" class="list-group-item px-0">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <!-- Avatar -->
+                                    <a class="avatar rounded-circle">
+                                        <img alt="Image placeholder" src="https://cdn1.vectorstock.com/i/1000x1000/74/40/education-open-book-icon-vector-10187440.jpg">
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <h5>{{item.nombre}}</h5>
+                                    <div class="progress progress-xs mb-0">
+                                        <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-footer></app-footer>>
+</div>

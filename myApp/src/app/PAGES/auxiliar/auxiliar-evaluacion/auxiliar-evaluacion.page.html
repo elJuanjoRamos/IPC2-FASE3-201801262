@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-toolbar color="dark">
+            <ion-title>Mis Evaluaciones</ion-title>
+        </ion-toolbar>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Formulario de Evaluacion</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-list>
+
+                <ion-item>
+                    <ion-label position="floating">Titulo</ion-label>
+                    <ion-input [(ngModel)]="titulo" type="text" name="imagen"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Curso</ion-label>
+                    <ion-select [(ngModel)]="curso" name="curso" ok-text="Okay" cancel-text="Dismiss">
+                        <ion-select-option *ngFor="let u of arrayCursos" value="{{u.idAsignacionAuxiliar}}">{{ u.nombre }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-button (click)="guardar(titulo, curso)" type="submit">Crear Evaluacion</ion-button>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container-fluid mt--6">
+        <div class="row card-wrapper">
+            <div *ngFor="let u of misEvaluaciones" class="col-lg-4">
+                <!-- Basic with card title -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <!-- Title -->
+                                <h5 class="h3 mb-0">Nombre: {{u.ev}}</h5>
+                            </div>
+                            <div class="col-4 text-right">
+                                <a (click)='eliminar(u.idEvaluacion)' style="color:blue" class="btn btn-sm btn-neutral">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-4">Curso: {{u.cur}}</p>
+                        <a (click)="verEvaluacion(u.idEvaluacion)" style="color:white" class="btn btn-primary">Gestionar a la evaluacion</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

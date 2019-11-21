@@ -88,6 +88,7 @@ export class ModalEstudianteComponent implements OnInit {
     }
     this.service.getAsistencia(data).subscribe(d => {
       this.misAsistencias = d;
+      console.log(d);
     });
   }
   terminar(){

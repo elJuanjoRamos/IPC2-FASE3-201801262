@@ -1,0 +1,86 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-toolbar color="dark">
+            <ion-buttons slot="primary">
+                <ion-button (click)="nuevoPost()" color="danger" fill="outline">
+                    Nuevo
+                    <ion-icon slot="end" name="create"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>Mis Post</ion-title>
+        </ion-toolbar>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card *ngFor="let u of posts">
+
+        <ion-item>
+            <ion-avatar slot="start">
+                <img src="../../../../assets/img/photo.png">
+            </ion-avatar>
+            <ion-label>{{u.auxiliar}}</ion-label>
+            <ion-label>{{u.titulo}}</ion-label>
+        </ion-item>
+
+        <img *ngIf="u.imagen != ''" src="{{u.imagen}}">
+        <iframe *ngIf="u.video != undefined" width="400" height="300" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        <ion-item>
+        </ion-item>
+        <ion-card-content>
+            <h2>{{u.texto}}</h2>
+
+            <ion-toolbar>
+                <ion-buttons slot="primary">
+                    <ion-button (click)="darLike(u.idPost)">
+                        <ion-icon slot="icon-only" name="heart"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-title>Comentarios</ion-title>
+                <ion-buttons slot="end">
+                    <ion-menu-button (click)="inicializarComentario(u.idPost)" autoHide="false"></ion-menu-button>
+                </ion-buttons>
+            </ion-toolbar>
+
+        </ion-card-content>
+        <br>
+        <ion-row>
+            <ion-segment>
+                <ion-segment-button value="friends">
+                    <ion-input [(ngModel)]="com" placeholder="Comentar"></ion-input>
+                </ion-segment-button>
+                <ion-segment-button>
+                    <ion-button (click)="comentar(com, u.idPost)" color="primary">Comentar</ion-button>
+                </ion-segment-button>
+            </ion-segment>
+
+        </ion-row>
+        <ion-row *ngFor="let u of arrayComentarios">
+            <ion-item *ngIf="u.comentario != ''">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <div>
+                                {{u.usuario}}
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div>
+                                {{u.comentario}}
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <div>
+                                {{u.fecha}}
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+        </ion-row>
+    </ion-card>
+</ion-content>

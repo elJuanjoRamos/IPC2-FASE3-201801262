@@ -12,41 +12,25 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-card>
+    <ion-card *ngFor="let u of misPost">
 
         <ion-item>
             <ion-avatar slot="start">
-                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                <img src="../../../../assets/img/photo.png">
             </ion-avatar>
             <ion-label>Item Avatar</ion-label>
-            <ion-label>Item Avatar</ion-label>
+            <ion-label>{{u.titulo}}</ion-label>
         </ion-item>
 
-        <img src="https://ionicframework.com/docs/v3/dist/preview-app/www/assets/img/advance-card-bttf.png">
-
+        <img *ngIf="u.imagen != ''" src="{{u.imagen}}">
+        <iframe *ngIf="u.video != undefined" width="400" height="300" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        <ion-item>
+        </ion-item>
         <ion-card-content>
-            <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+            <p>{{u.texto}}</p>
         </ion-card-content>
-
         <ion-row>
-            <ion-col>
-                <button>
-              <ion-icon name="thumbs-up"></ion-icon>
-              <div>12 Likes</div>
-            </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-start clear small>
-              <ion-icon name="text"></ion-icon>
-              <div>4 Comments</div>
-            </button>
-            </ion-col>
-            <ion-col align-self-center text-center>
-                <ion-note>
-                    11h ago
-                </ion-note>
-            </ion-col>
+            <ion-button (click)="editarPost(u.idPost)" color="primary">Editar</ion-button>
         </ion-row>
-
     </ion-card>
 </ion-content>

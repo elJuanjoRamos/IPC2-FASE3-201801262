@@ -34,7 +34,7 @@ export class AuthenticationService {
         console.log(data);
         this.http.post(uriUsuario, data, { headers: head })
             .subscribe(user => {
-                console.log(user[0]);
+                console.log(user)
                 let res = {
                     'results': JSON.stringify(user[0]),
                     'json': () => { return user[0]; }

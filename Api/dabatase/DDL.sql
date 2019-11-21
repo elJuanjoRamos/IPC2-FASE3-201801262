@@ -341,7 +341,6 @@ CREATE TABLE Asistencia(
     ON DELETE CASCADE
 );
 
-
 DROP TABLE IF EXISTS Post;
 CREATE TABLE Post(
     idPost INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -349,6 +348,7 @@ CREATE TABLE Post(
     texto VARCHAR(300) NULL,
     video VARCHAR(300) Null,
     imagen VARCHAR(100) NULL,
+    titulo VARCHAR(100) NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
 	ON UPDATE CASCADE
     ON DELETE CASCADE
@@ -361,7 +361,8 @@ CREATE TABLE DetallePost(
     idUsuario INT NOT NULL,
     idPost INT NOT NULL,
     comentario VARCHAR(300) NULL,
-    clike VARCHAR(300) Null,
+    clike INT Null,
+    fecha DATE not null,
     FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
 	ON UPDATE CASCADE
     ON DELETE CASCADE,
@@ -995,5 +996,77 @@ END;
 $$
 
 
+-- PROCEDIMIENTOS DE POST
 
-CALL SP_GetAsistencia(1, '2019-11-19T17:56:17.248-06:00');
+DELIMITER $$
+CREATE PROCEDURE SP_CreatePost
+(IN _idUsuario INT, _titulo VARCHAR(100), _texto VARCHAR(100), _imagen VARCHAR(100), _video VARCHAR(100))
+BEGIN
+	INSERT INTO Post(idUsuario, texto, imagen, video, titulo) values(_idUsuario, _texto, _imagen, _video, _titulo);
+END;
+$$
+
+
+DELIMITER $$
+CREATE PROCEDURE SP_UpdatePost
+(IN _idUsuario INT, _titulo VARCHAR(100), _texto VARCHAR(100), _imagen VARCHAR(100), _video VARCHAR(100), _id INT)
+BEGIN
+	UPDATE POST SET titulo = _titulo, imagen = _imagen, video = _video WHERE idPost = _id ;
+END;
+$$
+
+-- PROCEDURES LIKE Y COMENTARIO
+
+DELIMITER $$
+CREATE PROCEDURE SP_DarLike
+(IN _idUsuario INT, _idPost INT)
+BEGIN
+
+DECLARE _existe INT;
+DECLARE _nlike INT;
+DECLARE _nuevo INT;
+
+	SET _existe = (select COUNT(*) FROM DetallePost WHERE idUsuario = _idUsuario AND idPost = _idPost);
+	IF(_existe = 0) THEN
+
+		INSERT INTO DetallePost(idUsuario, idPost, comentario, clike, fecha) VALUES(_idUsuario, _idPost,"", 1, NOW());
+		SET _nuevo = 1;
+        SELECT _nuevo;
+	ELSE
+        SET _nlike = (SELECT clike from DetallePost WHERE idPost = _idPost limit 1);
+        IF(_nlike = 1) THEN
+			SET _nuevo = 0;
+		ELSE
+			SET _nuevo = 1;
+        END IF;
+		UPDATE DetallePost SET clike = _nuevo WHERE idPost = _idPost;
+		SELECT _nuevo;
+	END IF;
+END;
+$$
+
+
+DELIMITER $$
+CREATE PROCEDURE SP_Comentar
+(IN _idUsuario INT, _idPost INT, _texto VARCHAR(100))
+BEGIN
+		INSERT INTO DetallePost(idUsuario, idPost, comentario, clike, fecha) VALUES(_idUsuario, _idPost,_texto, 1, NOW());
+END;
+$$
+
+DROP TABLE IF EXISTS DetallePost;
+CREATE TABLE DetallePost(
+    idDetallePost INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idUsuario INT NOT NULL,
+    idPost INT NOT NULL,
+    comentario VARCHAR(300) NULL,
+    clike INT Null,
+    fecha DATETIME not null,
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    FOREIGN KEY (idPost) REFERENCES Post(idPost)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+

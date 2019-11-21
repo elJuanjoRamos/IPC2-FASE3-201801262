@@ -20,6 +20,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'auxiliar-evaluacion',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../auxiliar-evaluacion/auxiliar-evaluacion.module').then(m => m.AuxiliarEvaluacionPageModule)
+          }
+        ]
+      },
+      {
         path: 'auxiliar-cursos',
         children: [
           {
@@ -36,6 +46,16 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../auxiliar-post/auxiliar-post.module').then(m => m.AuxiliarPostPageModule)
+          }
+        ]
+      },
+      {
+        path: 'auxiliar-mensaje',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../auxiliar-mensaje/auxiliar-mensaje.module').then(m => m.AuxiliarMensajePageModule)
           }
         ]
       },

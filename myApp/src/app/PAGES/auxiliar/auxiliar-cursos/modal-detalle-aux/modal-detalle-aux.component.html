@@ -80,7 +80,6 @@
         </ion-card-content>
     </ion-card>
     <ion-card>
-
         <ion-card-header>
             Formulario de Actividad
         </ion-card-header>
@@ -89,32 +88,70 @@
 
                 <ion-item>
                     <ion-label fixed>Nombre: </ion-label>
-                    <ion-input type="text" value=""></ion-input>
+                    <ion-input [(ngModel)]="nombre" type="text" value=""></ion-input>
                 </ion-item>
 
                 <ion-item>
                     <ion-label fixed>Ponderacion: </ion-label>
-                    <ion-input type="number"></ion-input>
+                    <ion-input [(ngModel)]="ponderacion" type="number"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label>Hora Limite</ion-label>
-                    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+                    <ion-datetime [(ngModel)]="hora" displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label>Fecha Limite</ion-label>
-                    <ion-datetime min="1990-02" max="2000" [dayShortNames]="customDayShortNames" displayFormat="DDD. MMM DD, YY" monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
+                    <ion-datetime [(ngModel)]="fecha" min="1990-02" [dayShortNames]="customDayShortNames" displayFormat="DDD. MMM DD, YY" monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label>Archivos</ion-label>
-                    <ion-select value="0" ok-text="Okay" cancel-text="Dismiss">
+                    <ion-select [(ngModel)]="archivo" value="0" ok-text="Okay" cancel-text="Dismiss">
                         <ion-select-option value="0">No permitir</ion-select-option>
                         <ion-select-option value="1">Permitir</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-list>
+            <ion-item>
+                <ion-button (click)="guardar(nombre, ponderacion, hora, fecha, archivo)" color="primary">Guardar</ion-button>
+            </ion-item>
         </ion-card-content>
-
     </ion-card>
 
+    <br>
+    <div class="card-wrapper">
+        <div class="card">
+            <div class="card-header">
+                <div class="text-center">
+                    <h3 class="mb-0">Actividades</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ion-card *ngFor="let u of misActividades">
+        <ion-card-content>
+            <ion-list>
 
+                <ion-item>
+                    <ion-label fixed>Nombre: {{u.nombre}}</ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label fixed>Ponderacion: {{u.ponderacion}} </ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Hora Limite: {{u.horaLimite}}</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Fecha Limite: {{u.fechaLimite}}</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label *ngIf="u.conArchivo == 1">Archivos: Si</ion-label>
+                    <ion-label *ngIf="u.conArchivo == 0">Archivos: No</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-button (click)="eliminar(u.idActividad)" color="danger">Eliminar</ion-button>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

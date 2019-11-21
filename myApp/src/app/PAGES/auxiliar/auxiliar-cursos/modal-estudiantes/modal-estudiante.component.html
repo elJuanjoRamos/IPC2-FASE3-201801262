@@ -60,8 +60,8 @@
 
         </ion-card-content>
     </ion-card>
-    <ion-card>
-        <ion-card-header *ngIf="corroborarAsistencia ==false">
+    <ion-card *ngIf="corroborarAsistencia ==false">
+        <ion-card-header>
             <ion-card-title>Estudiantes Asignados</ion-card-title>
         </ion-card-header>
         <ion-item *ngIf="corroborarAsistencia ==false">

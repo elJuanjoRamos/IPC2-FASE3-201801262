@@ -39,6 +39,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'estudiante-post',
+          children: [
+            {
+              path: '',
+              loadChildren: () =>
+                import('../estudiante-post/estudiante-post.module').then(m => m.EstudiantePostPageModule)
+            }
+          ]
+        },
+      {
         path: '',
         redirectTo: '/view/estudiante-home',
         pathMatch: 'full'

@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AuxiliarPostPage } from './auxiliar-post.page';
+import { ModalPostComponent } from './modal-post/modal-post.component';
+import { UsuarioService } from '../../../services/usuario.service';
+import { ModalEditarPostComponent } from './modal-post/modal-editar-post.component';
 
 const routes: Routes = [
   {
@@ -20,7 +23,10 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
-  ],
-  declarations: [AuxiliarPostPage]
+  ], providers: [UsuarioService],
+  declarations: [AuxiliarPostPage,
+      ModalPostComponent,
+      ModalEditarPostComponent],
+  entryComponents: [ModalPostComponent, ModalEditarPostComponent]
 })
 export class AuxiliarPostPageModule {}

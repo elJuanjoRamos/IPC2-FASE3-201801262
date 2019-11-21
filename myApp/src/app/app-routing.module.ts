@@ -25,6 +25,10 @@ const routes: Routes = [
   { path: 'estudiante-ticket', loadChildren: './PAGES/estudiante/estudiante-ticket/estudiante-ticket.module#EstudianteTicketPageModule' },
   { path: 'auxiliar-cursos', loadChildren: './PAGES/auxiliar/auxiliar-cursos/auxiliar-cursos.module#AuxiliarCursosPageModule' },
   { path: 'auxiliar-post', loadChildren: './PAGES/auxiliar/auxiliar-post/auxiliar-post.module#AuxiliarPostPageModule' },
+  { path: 'estudiante-post', loadChildren: './PAGES/estudiante/estudiante-post/estudiante-post.module#EstudiantePostPageModule' },
+  { path: 'estudiante-mensaje', loadChildren: './PAGES/estudiante/estudiante-mensaje/estudiante-mensaje.module#EstudianteMensajePageModule' },
+  { path: 'auxiliar-mensaje', loadChildren: './PAGES/auxiliar/auxiliar-mensaje/auxiliar-mensaje.module#AuxiliarMensajePageModule' },
+  { path: 'auxiliar-evaluacion', loadChildren: './PAGES/auxiliar/auxiliar-evaluacion/auxiliar-evaluacion.module#AuxiliarEvaluacionPageModule' },
 
 ];
 @NgModule({
